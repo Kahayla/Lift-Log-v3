@@ -109,7 +109,9 @@ export default function AddSession() {
   return (
     <div className="App">
       <div className="main-container">
-        <h1 className="title p-4 text-white">LiftLog</h1>
+        <h1 className="title p-4 text-white text-center display-4 display-md-1">
+          LiftLog
+        </h1>
         <NavBar />
       </div>
       <div className="container">

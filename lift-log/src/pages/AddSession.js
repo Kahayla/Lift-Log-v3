@@ -4,14 +4,15 @@ import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useSession } from "../SessionContext";
 import NavBar from "../components/NavBar";
-import { Outlet } from "react-router-dom";
-import NavigationButtons from "../components/NavigationButtons";
+import { Outlet, useNavigate } from "react-router-dom";
+// import NavigationButtons from "../components/NavigationButtons";
 import { v4 as uuidv4 } from "uuid";
 
 const exerciseOptions = ["bench-press", "chest-press", "bicep-curls"];
 
 const AddSessionForm = () => {
   const { dispatch } = useSession();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     id: null,
@@ -52,6 +53,7 @@ const AddSessionForm = () => {
       sets: "",
       weight: "",
     });
+    navigate("/ViewSessions");
   };
 
   return (
@@ -128,7 +130,7 @@ const AddSessionForm = () => {
       </Form.Group>
 
       <Button variant="primary" type="submit">
-        Submit
+        Create Session
       </Button>
     </Form>
   );
@@ -166,7 +168,7 @@ export default function AddSession() {
         </div>
       </div>
       <div className="text-center"></div>
-      <NavigationButtons />
+      {/* <NavigationButtons /> */}
       <Outlet />
     </div>
   );

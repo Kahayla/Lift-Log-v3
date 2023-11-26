@@ -25,7 +25,7 @@ export default function Home() {
         </div>
       </div>
       <div className="container">
-        <div classNamcoe="row d-flex justify-content-center">
+        <div className="row d-flex justify-content-center">
           <div className="col-md-8 text-center">
             <div className="blurb py-4">
               <b>Get started</b> dolor sit amet, consectetur adipiscing elit.
@@ -33,9 +33,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="text-center">
-        <NavigationButtons />
-      </div>
+      <div className="text-center">{/* <NavigationButtons /> */}</div>
       <Outlet />
     </div>
   );

@@ -34,15 +34,27 @@ export default function ViewSessions() {
           state.sessions.map((session) => (
             <div key={session.date} className="row mb-3 justify-content-center">
               <div
-                className="card col-12 col-md-6"
+                className="card col-12 col-md-6 p-0"
                 style={{ maxWidth: "18rem" }}
               >
                 <div className="card-header">{`Session Date: ${session.date}`}</div>
                 <ul className="list-group list-group-flush">
-                  <li className="list-group-item">{`Exercise: ${session.exercise}`}</li>
-                  <li className="list-group-item">{`Reps: ${session.reps}`}</li>
-                  <li className="list-group-item">{`Sets: ${session.sets}`}</li>
-                  <li className="list-group-item">{`Weight: ${session.weight}`}</li>
+                  <li
+                    className="list-group-item p-2"
+                    style={{ width: "100%" }}
+                  >{`Exercise: ${session.exercise}`}</li>
+                  <li
+                    className="list-group-item p-2"
+                    style={{ width: "100%" }}
+                  >{`Reps: ${session.reps}`}</li>
+                  <li
+                    className="list-group-item p-2"
+                    style={{ width: "100%" }}
+                  >{`Sets: ${session.sets}`}</li>
+                  <li
+                    className="list-group-item p-2"
+                    style={{ width: "100%" }}
+                  >{`Weight: ${session.weight}`}</li>
                 </ul>
               </div>
             </div>

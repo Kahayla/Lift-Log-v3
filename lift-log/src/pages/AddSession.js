@@ -58,78 +58,98 @@ const AddSessionForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicDate">
-        <Form.Label>Date</Form.Label>
-        <Form.Control
-          type="date"
-          placeholder="dd/mm/yyyy"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-          required
-        />
+      <Form.Group className="mb-3 row" controlId="formBasicDate">
+        <Form.Label className="col-sm-2 col-form-label col-md-3">
+          Date:
+        </Form.Label>
+        <div className="col-sm-10 col-md-9">
+          <Form.Control
+            type="date"
+            placeholder="dd/mm/yyyy"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            required
+          />
+        </div>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicExercise">
-        <Form.Label>Exercise</Form.Label>
-        <Form.Control
-          as="select"
-          name="exercise"
-          value={formData.exercise}
-          onChange={handleChange}
-          required
-        >
-          <option value="" disabled>
-            Select an exercise
-          </option>
-          {exerciseOptions.map((exercise) => (
-            <option key={exercise} value={exercise}>
-              {exercise}
+      <Form.Group className="mb-3 row" controlId="formBasicExercise">
+        <Form.Label className="col-sm-2 col-form-label col-md-3">
+          Exercise:
+        </Form.Label>
+        <div className="col-sm-10 col-md-9">
+          <Form.Control
+            as="select"
+            name="exercise"
+            value={formData.exercise}
+            onChange={handleChange}
+            required
+          >
+            <option value="" disabled>
+              Select an exercise:
             </option>
-          ))}
-        </Form.Control>
+            {exerciseOptions.map((exercise) => (
+              <option key={exercise} value={exercise}>
+                {exercise}
+              </option>
+            ))}
+          </Form.Control>
+        </div>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicReps">
-        <Form.Label>Reps</Form.Label>
-        <Form.Control
-          type="number"
-          placeholder="Enter reps"
-          name="reps"
-          value={formData.reps}
-          onChange={handleChange}
-          required
-          min="0"
-        />
+      <Form.Group className="mb-3 row" controlId="formBasicReps">
+        <Form.Label className="col-sm-2 col-form-label col-md-3">
+          Reps:
+        </Form.Label>
+        <div className="col-sm-10 col-md-9">
+          <Form.Control
+            type="number"
+            placeholder="Enter reps"
+            name="reps"
+            value={formData.reps}
+            onChange={handleChange}
+            required
+            min="0"
+          />
+        </div>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicSets">
-        <Form.Label>Sets</Form.Label>
-        <Form.Control
-          type="number"
-          placeholder="Enter sets"
-          name="sets"
-          value={formData.sets}
-          onChange={handleChange}
-          required
-          min="0"
-        />
+      <Form.Group className="mb-3 row" controlId="formBasicSets">
+        <Form.Label className="col-sm-2 col-form-label col-md-3">
+          Sets:
+        </Form.Label>
+        <div className="col-sm-10 col-md-9">
+          <Form.Control
+            type="number"
+            placeholder="Enter sets"
+            name="sets"
+            value={formData.sets}
+            onChange={handleChange}
+            required
+            min="0"
+          />
+        </div>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicWeight">
-        <Form.Label>Weight</Form.Label>
-        <Form.Control
-          type="number"
-          placeholder="Enter weight"
-          name="weight"
-          value={formData.weight}
-          onChange={handleChange}
-          required
-          min="0"
-        />
+      <Form.Group className="mb-3 row" controlId="formBasicWeight">
+        <Form.Label className="col-sm-2 col-form-label col-md-3">
+          Weight (kg):
+        </Form.Label>
+        <div className="col-sm-10 col-md-9">
+          <Form.Control
+            type="number"
+            placeholder="Enter weight"
+            name="weight"
+            value={formData.weight}
+            onChange={handleChange}
+            required
+            min="0"
+          />
+        </div>
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" className="mt-5">
         Create Session
       </Button>
     </Form>
@@ -149,11 +169,9 @@ export default function AddSession() {
         <div className="row d-flex justify-content-center">
           <div className="col-md-8 text-center">
             <div className="blurb py-4">
-              <h1 className="mb-4">About Us</h1>
-              <p>
-                Some text goes here
-                hfdklshfjkldshkjgbdjkabgjhdebljgbadljgbjkdasbgjkl
-              </p>
+              <h1 className="mb-0">
+                <b>Add Session</b>
+              </h1>
             </div>
           </div>
         </div>

@@ -63,6 +63,9 @@ const ViewSessions = () => {
         </h1>
         <NavBar />
       </div>
+      <h1 className="text-center mt-4">
+        <b>Session History</b>
+      </h1>
       <div className="container">
         {state.sessions.length > 0 ? (
           state.sessions.map((session) => (
@@ -112,11 +115,8 @@ const ViewSessions = () => {
                     <li className={`list-group-item p-2`}>{`Sets: ${
                       session.sets || ""
                     }`}</li>
-                    <li className={`list-group-item p-2`}>{`Weight: ${
+                    <li className={`list-group-item p-2`}>{`Weight (kg): ${
                       session.weight || ""
-                    }`}</li>
-                    <li className={`list-group-item p-2`}>{`Date: ${
-                      session.date || ""
                     }`}</li>
                   </ul>
                 </form>
@@ -133,11 +133,7 @@ const ViewSessions = () => {
       </div>
       <div className="container">
         <div className="row d-flex justify-content-center">
-          <div className="col-md-8 text-center">
-            <div className="blurb py-4">
-              <b>Get started</b> dolor sit amet, consectetur adipiscing elit.
-            </div>
-          </div>
+          <div className="col-md-8 text-center"></div>
         </div>
       </div>
       <div className="text-center">

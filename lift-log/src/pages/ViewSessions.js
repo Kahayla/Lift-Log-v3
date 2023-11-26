@@ -30,33 +30,30 @@ export default function ViewSessions() {
         </div>
       </div>
       <div className="container">
-        <div className="row d-flex justify-content-center">
-          <div className="col-md-8 text-center">
-            <div className="blurb py-4">
-              {state.sessions.length > 0 ? (
-                <div className="d-flex flex-wrap justify-content-start">
-                  {state.sessions.map((session) => (
-                    <div
-                      key={session.date}
-                      className="card m-3"
-                      style={{ width: "18rem" }}
-                    >
-                      <div className="card-header">{`Session Date: ${session.date}`}</div>
-                      <ul className="list-group list-group-flush">
-                        <li className="list-group-item">{`Exercise: ${session.exercise}`}</li>
-                        <li className="list-group-item">{`Reps: ${session.reps}`}</li>
-                        <li className="list-group-item">{`Sets: ${session.sets}`}</li>
-                        <li className="list-group-item">{`Weight: ${session.weight}`}</li>
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p>No sessions logged yet.</p>
-              )}
+        {state.sessions.length > 0 ? (
+          state.sessions.map((session) => (
+            <div key={session.date} className="row mb-3 justify-content-center">
+              <div
+                className="card col-12 col-md-6"
+                style={{ maxWidth: "18rem" }}
+              >
+                <div className="card-header">{`Session Date: ${session.date}`}</div>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item">{`Exercise: ${session.exercise}`}</li>
+                  <li className="list-group-item">{`Reps: ${session.reps}`}</li>
+                  <li className="list-group-item">{`Sets: ${session.sets}`}</li>
+                  <li className="list-group-item">{`Weight: ${session.weight}`}</li>
+                </ul>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="row d-flex justify-content-center">
+            <div className="col-md-8 text-center">
+              <p>No sessions logged yet.</p>
             </div>
           </div>
-        </div>
+        )}
       </div>
       <div className="container">
         <div className="row d-flex justify-content-center">

@@ -1,17 +1,16 @@
-import NavBar from "../components/NavBar";
-import NavigationButtons from "../components/NavigationButtons";
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useSession } from "../SessionContext";
+import NavBar from "../components/NavBar";
+import { Outlet } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import NavigationButtons from "../components/NavigationButtons";
 
 const exerciseOptions = ["bench-press", "chest-press", "bicep-curls"];
 
 const AddSessionForm = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
+  const { dispatch } = useSession();
   const [formData, setFormData] = useState({
     date: "",
     exercise: "",
@@ -22,16 +21,12 @@ const AddSessionForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => {
-      const newData = { ...prevData, [name]: value };
-      console.log("New Form Data:", newData);
-      return newData;
-    });
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted. Sending data:", formData);
+    dispatch({ type: "ADD_SESSION", payload: formData });
     setFormData({
       date: "",
       exercise: "",
@@ -39,9 +34,6 @@ const AddSessionForm = () => {
       sets: "",
       weight: "",
     });
-
-    // Use navigate to go to the ViewSessions route with form data as state
-    navigate("/ViewSessions", { state: { formData } });
   };
 
   return (
@@ -143,6 +135,7 @@ export default function AddSession() {
         </div>
       </div>
       <div className="text-center"></div>
+      <NavigationButtons />
       <Outlet />
     </div>
   );

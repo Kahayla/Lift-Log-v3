@@ -1,13 +1,12 @@
 import React from "react";
 import NavBar from "../components/NavBar";
 import NavigationButtons from "../components/NavigationButtons";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { useSession } from "../SessionContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function ViewSessions() {
-  // Access form data passed from AddSession component
-  const location = useLocation();
-  const formData = location.state && location.state.formData;
+  const { state } = useSession();
 
   return (
     <div className="App">
@@ -32,17 +31,21 @@ export default function ViewSessions() {
         <div className="row d-flex justify-content-center">
           <div className="col-md-8 text-center">
             <div className="blurb py-4">
-              {formData ? (
+              {state.sessions.length > 0 ? (
                 <>
-                  <h2>Form Data from AddSession:</h2>
-                  <p>Date: {formData.date}</p>
-                  <p>Exercise: {formData.exercise}</p>
-                  <p>Reps: {formData.reps}</p>
-                  <p>Sets: {formData.sets}</p>
-                  <p>Weight: {formData.weight}</p>
+                  <h2>All Sessions:</h2>
+                  {state.sessions.map((session, index) => (
+                    <div key={index}>
+                      <p>Date: {session.date}</p>
+                      <p>Exercise: {session.exercise}</p>
+                      <p>Reps: {session.reps}</p>
+                      <p>Sets: {session.sets}</p>
+                      <p>Weight: {session.weight}</p>
+                    </div>
+                  ))}
                 </>
               ) : (
-                <p>No form data available.</p>
+                <p>No sessions logged yet.</p>
               )}
             </div>
           </div>

@@ -29,6 +29,18 @@ const AddSessionForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (
+      !formData.date ||
+      !formData.exercise ||
+      !formData.reps ||
+      !formData.sets ||
+      !formData.weight
+    ) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
     const newSession = { ...formData, id: uuidv4() };
     console.log(newSession);
     dispatch({ type: "ADD_SESSION", payload: newSession });
@@ -52,6 +64,7 @@ const AddSessionForm = () => {
           name="date"
           value={formData.date}
           onChange={handleChange}
+          required
         />
       </Form.Group>
 
@@ -62,7 +75,11 @@ const AddSessionForm = () => {
           name="exercise"
           value={formData.exercise}
           onChange={handleChange}
+          required
         >
+          <option value="" disabled>
+            Select an exercise
+          </option>
           {exerciseOptions.map((exercise) => (
             <option key={exercise} value={exercise}>
               {exercise}
@@ -79,6 +96,8 @@ const AddSessionForm = () => {
           name="reps"
           value={formData.reps}
           onChange={handleChange}
+          required
+          min="0"
         />
       </Form.Group>
 
@@ -90,6 +109,8 @@ const AddSessionForm = () => {
           name="sets"
           value={formData.sets}
           onChange={handleChange}
+          required
+          min="0"
         />
       </Form.Group>
 
@@ -101,6 +122,8 @@ const AddSessionForm = () => {
           name="weight"
           value={formData.weight}
           onChange={handleChange}
+          required
+          min="0"
         />
       </Form.Group>
 

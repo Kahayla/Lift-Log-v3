@@ -6,6 +6,7 @@ import { useSession } from "../SessionContext";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link, useHistory } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   exercise: Yup.string().required("Exercise is required"),
@@ -23,7 +24,7 @@ const validationSchema = Yup.object().shape({
 
 const ViewSessions = () => {
   const { state, dispatch } = useSession();
-
+  //   const history = useHistory();
   const formik = useFormik({
     initialValues: {
       id: null,
@@ -50,16 +51,9 @@ const ViewSessions = () => {
     },
   });
 
-  const handleEdit = (session) => {
-    formik.setValues({
-      id: session.id,
-      exercise: session.exercise || "",
-      reps: session.reps || "",
-      sets: session.sets || "",
-      weight: session.weight || "",
-      date: session.date || "",
-    });
-  };
+  //   const handleEdit = (session) => {
+  //     history.push(`/EditSession/${session.id}`, { session });
+  //   };
 
   return (
     <div className="App">
@@ -104,12 +98,12 @@ const ViewSessions = () => {
                   ) : (
                     <>
                       {`Session Date: ${session.date}`}
-                      <button
+                      <Link
+                        to={`/EditSession/${session.id}`}
                         className="btn btn-primary btn-sm position-absolute top-0 end-0 mt-2 me-2"
-                        onClick={() => handleEdit(session)}
                       >
                         Edit
-                      </button>
+                      </Link>
                     </>
                   )}
                 </div>

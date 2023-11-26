@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useSession } from "../SessionContext";
 import NavBar from "../components/NavBar";
 import { Outlet } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationButtons from "../components/NavigationButtons";
 import { v4 as uuidv4 } from "uuid";
 

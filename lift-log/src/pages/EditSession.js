@@ -4,6 +4,10 @@ import NavigationButtons from "../components/NavigationButtons";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useLocation } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import "bootstrap/dist/css/bootstrap.min.css";
+const exerciseOptions = ["bench-press", "chest-press", "bicep-curls"];
 
 const EditSession = () => {
   const navigate = useNavigate();
@@ -29,10 +33,7 @@ const EditSession = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Implement your form submission logic here
-    // For example, you can dispatch an action to update the session
     console.log("Form submitted:", formikValues);
-    // After submission, you can navigate back to the ViewSessions page
     navigate("/ViewSessions");
   };
 
@@ -49,69 +50,78 @@ const EditSession = () => {
           <div className="col-md-8 text-center">
             <div className="blurb py-4">
               <h1 className="mb-4">Edit Session</h1>
-              <form onSubmit={handleSubmit}>
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item p-2">{`Exercise: ${
-                    formikValues.exercise || ""
-                  }`}</li>
-                  <li className="list-group-item p-2">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="exercise"
-                      value={formikValues.exercise}
-                      onChange={handleInputChange}
-                    />
-                  </li>
-                  <li className="list-group-item p-2">{`Reps: ${
-                    formikValues.reps || ""
-                  }`}</li>
-                  <li className="list-group-item p-2">
-                    <input
-                      type="number"
-                      className="form-control"
-                      name="reps"
-                      value={formikValues.reps}
-                      onChange={handleInputChange}
-                    />
-                  </li>
-                  <li className="list-group-item p-2">{`Sets: ${
-                    formikValues.sets || ""
-                  }`}</li>
-                  <li className="list-group-item p-2">
-                    <input
-                      type="number"
-                      className="form-control"
-                      name="sets"
-                      value={formikValues.sets}
-                      onChange={handleInputChange}
-                    />
-                  </li>
-                  <li className="list-group-item p-2">{`Weight: ${
-                    formikValues.weight || ""
-                  }`}</li>
-                  <li className="list-group-item p-2">
-                    <input
-                      type="number"
-                      className="form-control"
-                      name="weight"
-                      value={formikValues.weight}
-                      onChange={handleInputChange}
-                    />
-                  </li>
-                  <li className="list-group-item p-2">{`Date: ${
-                    formikValues.date || ""
-                  }`}</li>
-                  <li className="list-group-item p-2">
-                    <input
-                      type="date"
-                      className="form-control"
-                      name="date"
-                      value={formikValues.date}
-                      onChange={handleInputChange}
-                    />
-                  </li>
-                </ul>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicDate">
+                  <Form.Label>Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    placeholder="dd/mm/yyyy"
+                    name="date"
+                    value={formikValues.date}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicExercise">
+                  <Form.Label>Exercise</Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="exercise"
+                    value={formikValues.exercise}
+                    onChange={handleInputChange}
+                    required
+                  >
+                    <option value="" disabled>
+                      Select an exercise
+                    </option>
+                    {exerciseOptions.map((exercise) => (
+                      <option key={exercise} value={exercise}>
+                        {exercise}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicReps">
+                  <Form.Label>Reps</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter reps"
+                    name="reps"
+                    value={formikValues.reps}
+                    onChange={handleInputChange}
+                    required
+                    min="0"
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicSets">
+                  <Form.Label>Sets</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter sets"
+                    name="sets"
+                    value={formikValues.sets}
+                    onChange={handleInputChange}
+                    required
+                    min="0"
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicWeight">
+                  <Form.Label>Weight</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter weight"
+                    name="weight"
+                    value={formikValues.weight}
+                    onChange={handleInputChange}
+                    required
+                    min="0"
+                  />
+                </Form.Group>
+
                 <button type="submit" className="btn btn-success btn-sm mt-2">
                   Save
                 </button>
@@ -121,7 +131,7 @@ const EditSession = () => {
                 >
                   Cancel
                 </Link>
-              </form>
+              </Form>
             </div>
           </div>
         </div>

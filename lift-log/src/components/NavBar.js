@@ -8,7 +8,7 @@ export default function NavBar() {
     <div className="container-fluid">
       <div className="row">
         <div className="col">
-          <nav className="navbar navbar-expand-md navbar-dark">
+          <nav className="navbar navbar-expand-md navbar-dark d-flex justify-content-between align-items-center">
             <button
               className="navbar-toggler mx-auto"
               type="button"
@@ -22,7 +22,7 @@ export default function NavBar() {
             </button>
 
             <div className="collapse navbar-collapse" id="navbarCollapse">
-              <ul className="navbar-nav mr-auto text-center">
+              <ul className="navbar-nav mx-auto text-center">
                 <li className="nav-item">
                   <Link to="/" className="nav-link">
                     Home

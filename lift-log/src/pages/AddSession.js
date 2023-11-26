@@ -6,12 +6,15 @@ import NavBar from "../components/NavBar";
 import { Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationButtons from "../components/NavigationButtons";
+import { v4 as uuidv4 } from "uuid";
 
 const exerciseOptions = ["bench-press", "chest-press", "bicep-curls"];
 
 const AddSessionForm = () => {
   const { dispatch } = useSession();
+
   const [formData, setFormData] = useState({
+    id: null,
     date: "",
     exercise: "",
     reps: "",
@@ -26,8 +29,11 @@ const AddSessionForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({ type: "ADD_SESSION", payload: formData });
+    const newSession = { ...formData, id: uuidv4() };
+    console.log(newSession);
+    dispatch({ type: "ADD_SESSION", payload: newSession });
     setFormData({
+      id: null,
       date: "",
       exercise: "",
       reps: "",

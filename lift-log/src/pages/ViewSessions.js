@@ -34,7 +34,7 @@ export default function ViewSessions() {
           <div className="col-md-8 text-center">
             <div className="blurb py-4">
               {state.sessions.length > 0 ? (
-                <div className="d-flex flex-wrap justify-content-center">
+                <div className="d-flex flex-wrap justify-content-start">
                   {state.sessions.map((session) => (
                     <div
                       key={session.date}

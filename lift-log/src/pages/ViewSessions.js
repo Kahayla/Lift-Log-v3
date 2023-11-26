@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../components/NavBar";
 import NavigationButtons from "../components/NavigationButtons";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useSession } from "../SessionContext";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -24,6 +24,9 @@ const validationSchema = Yup.object().shape({
 
 const ViewSessions = () => {
   const { state, dispatch } = useSession();
+  console.log("Location State in ViewSessions:", useLocation().state);
+  console.log("Sessions Data in ViewSessions:", state.sessions);
+
   const formik = useFormik({
     initialValues: {
       id: null,
@@ -33,6 +36,7 @@ const ViewSessions = () => {
       weight: "",
       date: "",
     },
+
     validationSchema: validationSchema,
     onSubmit: (values) => {
       if (values.id) {
@@ -49,6 +53,7 @@ const ViewSessions = () => {
       formik.resetForm();
     },
   });
+  console.log("Location State:", useLocation().state);
 
   return (
     <div className="App">
@@ -80,12 +85,18 @@ const ViewSessions = () => {
                   ) : (
                     <>
                       {`Session Date: ${session.date}`}
-                      <Link
-                        to={`/EditSession/${session.id}`}
-                        className="btn btn-primary btn-sm position-absolute top-0 end-0 mt-2 me-2"
-                      >
-                        Edit
-                      </Link>
+
+                      {session && (
+                        <Link
+                          to={{
+                            pathname: `/EditSession/${session.id}`,
+                            state: { session },
+                          }}
+                          className="btn btn-primary btn-sm position-absolute top-0 end-0 mt-2 me-2"
+                        >
+                          Edit
+                        </Link>
+                      )}
                     </>
                   )}
                 </div>

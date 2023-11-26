@@ -1,26 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import NavigationButtons from "../components/NavigationButtons";
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useLocation } from "react-router-dom";
+import { useSession } from "../SessionContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 const exerciseOptions = ["bench-press", "chest-press", "bicep-curls"];
 
 const EditSession = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const session = location.state?.session;
+  const { id } = useParams(); // Extract session ID from URL
+  const { state, dispatch } = useSession();
+
+  // Find the session with the matching ID from the state
+  const session = state.sessions.find((s) => s.id === id) || {
+    id: null,
+    exercise: "",
+    reps: "",
+    sets: "",
+    weight: "",
+    date: "",
+  };
 
   const [formikValues, setFormikValues] = useState({
-    id: session?.id || null,
-    exercise: session?.exercise || "",
-    reps: session?.reps || "",
-    sets: session?.sets || "",
-    weight: session?.weight || "",
-    date: session?.date || "",
+    id: session.id,
+    exercise: session.exercise,
+    reps: session.reps,
+    sets: session.sets,
+    weight: session.weight,
+    date: session.date,
   });
 
   const handleInputChange = (e) => {
@@ -34,6 +44,11 @@ const EditSession = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formikValues);
+    // Use the ID from the formikValues to identify the session
+    dispatch({
+      type: "UPDATE_SESSION",
+      payload: { id: formikValues.id, data: formikValues },
+    });
     navigate("/ViewSessions");
   };
 
@@ -139,7 +154,6 @@ const EditSession = () => {
       <div className="text-center">
         <NavigationButtons />
       </div>
-      <Outlet />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import NavDropDown from "../components/NavDropDown";
+import NavBar from "../components/NavBar";
 import NavigationButtons from "../components/NavigationButtons";
 import { Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,14 +9,17 @@ export default function Home() {
     <div className="App">
       <div className="main-container">
         <h1 className="title p-4 text-white">LiftLog</h1>
-        <NavDropDown />
+        <NavBar />
       </div>
       <div className="container">
         <div className="row d-flex justify-content-center">
           <div className="col-md-8 text-center">
             <div className="blurb py-4">
               <h1 className="mb-4">About Us</h1>
-              {/* ... content ... */}
+              <p>
+                Some text goes here
+                hfdklshfjkldshkjgbdjkabgjhdebljgbadljgbjkdasbgjkl
+              </p>
             </div>
           </div>
         </div>
@@ -26,7 +29,6 @@ export default function Home() {
           <div className="col-md-8 text-center">
             <div className="blurb py-4">
               <b>Get started</b> dolor sit amet, consectetur adipiscing elit.
-              {/* ... more content ... */}
             </div>
           </div>
         </div>
@@ -34,7 +36,6 @@ export default function Home() {
       <div className="text-center">
         <NavigationButtons />
       </div>
-      {/* Outlet for nested routes */}
       <Outlet />
     </div>
   );

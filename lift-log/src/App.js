@@ -2,6 +2,8 @@ import "./styles/App.css";
 import Home from "./pages/Home";
 import ViewSession from "./pages/ViewSession";
 import AddSession from "./pages/AddSession";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {

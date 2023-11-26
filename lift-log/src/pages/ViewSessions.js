@@ -50,12 +50,12 @@ export default function ViewSessions() {
                 className="card col-12 col-md-6 p-0"
                 style={{ maxWidth: "18rem" }}
               >
-                <div className="card-header">
+                <div className="card-header position-relative">
                   {editMode && editedSession === session ? (
                     <>
                       <span>Edit Session</span>
                       <button
-                        className="btn btn-success btn-sm float-right"
+                        className="btn btn-success btn-sm position-absolute top-0 end-0 mt-2 me-2"
                         onClick={handleSave}
                       >
                         Save
@@ -65,7 +65,7 @@ export default function ViewSessions() {
                     <>
                       {`Session Date: ${session.date}`}
                       <button
-                        className="btn btn-primary btn-sm float-right"
+                        className="btn btn-primary btn-sm position-absolute top-0 end-0 mt-2 me-2"
                         onClick={() => handleEdit(session)}
                       >
                         Edit
@@ -75,10 +75,14 @@ export default function ViewSessions() {
                 </div>
                 <ul className="list-group list-group-flush">
                   <li
-                    className={`list-group-item p-2 ${
-                      editMode && editedSession === session ? "d-none" : ""
-                    }`}
-                    style={{ width: "100%" }}
+                    className={`list-group-item p-2`}
+                    style={{
+                      width: "100%",
+                      display:
+                        editMode && editedSession === session
+                          ? "none"
+                          : "block",
+                    }}
                   >{`Exercise: ${session.exercise}`}</li>
                   {editMode && editedSession === session && (
                     <li
@@ -99,10 +103,14 @@ export default function ViewSessions() {
                     </li>
                   )}
                   <li
-                    className={`list-group-item p-2 ${
-                      editMode && editedSession === session ? "d-none" : ""
-                    }`}
-                    style={{ width: "100%" }}
+                    className={`list-group-item p-2`}
+                    style={{
+                      width: "100%",
+                      display:
+                        editMode && editedSession === session
+                          ? "none"
+                          : "block",
+                    }}
                   >{`Reps: ${session.reps}`}</li>
                   {editMode && editedSession === session && (
                     <li
@@ -123,10 +131,14 @@ export default function ViewSessions() {
                     </li>
                   )}
                   <li
-                    className={`list-group-item p-2 ${
-                      editMode && editedSession === session ? "d-none" : ""
-                    }`}
-                    style={{ width: "100%" }}
+                    className={`list-group-item p-2`}
+                    style={{
+                      width: "100%",
+                      display:
+                        editMode && editedSession === session
+                          ? "none"
+                          : "block",
+                    }}
                   >{`Sets: ${session.sets}`}</li>
                   {editMode && editedSession === session && (
                     <li
@@ -147,10 +159,14 @@ export default function ViewSessions() {
                     </li>
                   )}
                   <li
-                    className={`list-group-item p-2 ${
-                      editMode && editedSession === session ? "d-none" : ""
-                    }`}
-                    style={{ width: "100%" }}
+                    className={`list-group-item p-2`}
+                    style={{
+                      width: "100%",
+                      display:
+                        editMode && editedSession === session
+                          ? "none"
+                          : "block",
+                    }}
                   >{`Weight: ${session.weight}`}</li>
                   {editMode && editedSession === session && (
                     <li
@@ -165,6 +181,24 @@ export default function ViewSessions() {
                           setEditedSession({
                             ...editedSession,
                             weight: e.target.value,
+                          })
+                        }
+                      />
+                    </li>
+                  )}
+                  {editMode && editedSession === session && (
+                    <li
+                      className={`list-group-item p-2`}
+                      style={{ width: "100%" }}
+                    >
+                      <input
+                        type="date"
+                        className="form-control"
+                        value={editedSession.date}
+                        onChange={(e) =>
+                          setEditedSession({
+                            ...editedSession,
+                            date: e.target.value,
                           })
                         }
                       />

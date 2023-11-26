@@ -26,7 +26,7 @@ To get started with Lift-Log, follow these simple steps
    - `npm install`
    - `npm start`
 
-This will start the development server, and you can access the app in your web browser at `http://localhost:3001`.
+This will start the development server, and you can access the app in your web browser at `http://localhost:3000`.
 
 ## Contributing
 

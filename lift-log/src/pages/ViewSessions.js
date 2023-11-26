@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import NavigationButtons from "../components/NavigationButtons";
 import { Outlet } from "react-router-dom";
@@ -7,6 +7,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function ViewSessions() {
   const { state } = useSession();
+  const [editMode, setEditMode] = useState(false);
+  const [editedSession, setEditedSession] = useState(null);
+
+  const handleEdit = (session) => {
+    setEditedSession(session);
+    setEditMode(true);
+  };
+
+  const handleSave = () => {
+    // Implement your save logic here
+    setEditMode(false);
+    setEditedSession(null);
+  };
 
   return (
     <div className="App">
@@ -37,24 +50,126 @@ export default function ViewSessions() {
                 className="card col-12 col-md-6 p-0"
                 style={{ maxWidth: "18rem" }}
               >
-                <div className="card-header">{`Session Date: ${session.date}`}</div>
+                <div className="card-header">
+                  {editMode && editedSession === session ? (
+                    <>
+                      <span>Edit Session</span>
+                      <button
+                        className="btn btn-success btn-sm float-right"
+                        onClick={handleSave}
+                      >
+                        Save
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      {`Session Date: ${session.date}`}
+                      <button
+                        className="btn btn-primary btn-sm float-right"
+                        onClick={() => handleEdit(session)}
+                      >
+                        Edit
+                      </button>
+                    </>
+                  )}
+                </div>
                 <ul className="list-group list-group-flush">
                   <li
-                    className="list-group-item p-2"
+                    className={`list-group-item p-2 ${
+                      editMode && editedSession === session ? "d-none" : ""
+                    }`}
                     style={{ width: "100%" }}
                   >{`Exercise: ${session.exercise}`}</li>
+                  {editMode && editedSession === session && (
+                    <li
+                      className="list-group-item p-2"
+                      style={{ width: "100%" }}
+                    >
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={editedSession.exercise}
+                        onChange={(e) =>
+                          setEditedSession({
+                            ...editedSession,
+                            exercise: e.target.value,
+                          })
+                        }
+                      />
+                    </li>
+                  )}
                   <li
-                    className="list-group-item p-2"
+                    className={`list-group-item p-2 ${
+                      editMode && editedSession === session ? "d-none" : ""
+                    }`}
                     style={{ width: "100%" }}
                   >{`Reps: ${session.reps}`}</li>
+                  {editMode && editedSession === session && (
+                    <li
+                      className="list-group-item p-2"
+                      style={{ width: "100%" }}
+                    >
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={editedSession.reps}
+                        onChange={(e) =>
+                          setEditedSession({
+                            ...editedSession,
+                            reps: e.target.value,
+                          })
+                        }
+                      />
+                    </li>
+                  )}
                   <li
-                    className="list-group-item p-2"
+                    className={`list-group-item p-2 ${
+                      editMode && editedSession === session ? "d-none" : ""
+                    }`}
                     style={{ width: "100%" }}
                   >{`Sets: ${session.sets}`}</li>
+                  {editMode && editedSession === session && (
+                    <li
+                      className="list-group-item p-2"
+                      style={{ width: "100%" }}
+                    >
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={editedSession.sets}
+                        onChange={(e) =>
+                          setEditedSession({
+                            ...editedSession,
+                            sets: e.target.value,
+                          })
+                        }
+                      />
+                    </li>
+                  )}
                   <li
-                    className="list-group-item p-2"
+                    className={`list-group-item p-2 ${
+                      editMode && editedSession === session ? "d-none" : ""
+                    }`}
                     style={{ width: "100%" }}
                   >{`Weight: ${session.weight}`}</li>
+                  {editMode && editedSession === session && (
+                    <li
+                      className="list-group-item p-2"
+                      style={{ width: "100%" }}
+                    >
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={editedSession.weight}
+                        onChange={(e) =>
+                          setEditedSession({
+                            ...editedSession,
+                            weight: e.target.value,
+                          })
+                        }
+                      />
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>

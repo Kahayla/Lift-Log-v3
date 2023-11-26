@@ -1,6 +1,6 @@
 import NavBar from "../components/NavBar";
 import NavigationButtons from "../components/NavigationButtons";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
@@ -10,6 +10,7 @@ const exerciseOptions = ["bench-press", "chest-press", "bicep-curls"];
 
 const AddSessionForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [formData, setFormData] = useState({
     date: "",

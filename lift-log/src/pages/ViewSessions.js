@@ -1,12 +1,13 @@
 import React from "react";
 import NavBar from "../components/NavBar";
 import NavigationButtons from "../components/NavigationButtons";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function ViewSessions(props) {
+export default function ViewSessions() {
   // Access form data passed from AddSession component
-  const formData = props.location.state && props.location.state.formData;
+  const location = useLocation();
+  const formData = location.state && location.state.formData;
 
   return (
     <div className="App">

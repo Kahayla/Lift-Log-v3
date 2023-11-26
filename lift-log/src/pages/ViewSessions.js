@@ -4,7 +4,7 @@ import NavigationButtons from "../components/NavigationButtons";
 import { Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function Home() {
+export default function ViewSessions() {
   return (
     <div className="App">
       <div className="main-container">
@@ -15,7 +15,7 @@ export default function Home() {
         <div className="row d-flex justify-content-center">
           <div className="col-md-8 text-center">
             <div className="blurb py-4">
-              <h1 className="mb-4">About Us</h1>
+              <h1 className="mb-4">View Sessions</h1>
               <p>
                 Some text goes here
                 hfdklshfjkldshkjgbdjkabgjhdebljgbadljgbjkdasbgjkl

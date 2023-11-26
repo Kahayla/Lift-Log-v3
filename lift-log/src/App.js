@@ -1,6 +1,6 @@
 import "./styles/App.css";
 import Home from "./pages/Home";
-import ViewSession from "./pages/ViewSession";
+import ViewSessions from "./pages/ViewSessions";
 import AddSession from "./pages/AddSession";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/ViewSession" element={<ViewSession />} />
+        <Route path="/ViewSessions" element={<ViewSessions />} />
         <Route path="/AddSession" element={<AddSession />} />
         <Route path="/" element={<Home />} />
       </Routes>

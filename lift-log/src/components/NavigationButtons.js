@@ -11,7 +11,7 @@ export default function NavigationButtons() {
           Add Session
         </Button>{" "}
       </Link>
-      <Link to="/AllSessions">
+      <Link to="/ViewSessions">
         <Button variant="primary" size="lg">
           View Session
         </Button>

@@ -4,7 +4,10 @@ import NavigationButtons from "../components/NavigationButtons";
 import { Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function ViewSessions() {
+export default function ViewSessions(props) {
+  // Access form data passed from AddSession component
+  const formData = props.location.state && props.location.state.formData;
+
   return (
     <div className="App">
       <div className="main-container">
@@ -20,6 +23,26 @@ export default function ViewSessions() {
                 Some text goes here
                 hfdklshfjkldshkjgbdjkabgjhdebljgbadljgbjkdasbgjkl
               </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="container">
+        <div className="row d-flex justify-content-center">
+          <div className="col-md-8 text-center">
+            <div className="blurb py-4">
+              {formData ? (
+                <>
+                  <h2>Form Data from AddSession:</h2>
+                  <p>Date: {formData.date}</p>
+                  <p>Exercise: {formData.exercise}</p>
+                  <p>Reps: {formData.reps}</p>
+                  <p>Sets: {formData.sets}</p>
+                  <p>Weight: {formData.weight}</p>
+                </>
+              ) : (
+                <p>No form data available.</p>
+              )}
             </div>
           </div>
         </div>

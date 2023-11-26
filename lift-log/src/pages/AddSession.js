@@ -1,6 +1,6 @@
 import NavBar from "../components/NavBar";
 import NavigationButtons from "../components/NavigationButtons";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
@@ -8,7 +8,9 @@ import Form from "react-bootstrap/Form";
 
 const exerciseOptions = ["bench-press", "chest-press", "bicep-curls"];
 
-const AddSessionForm = ({ updateAllSessions }) => {
+const AddSessionForm = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     date: "",
     exercise: "",
@@ -29,8 +31,6 @@ const AddSessionForm = ({ updateAllSessions }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Submitted. Sending data:", formData);
-    // Assuming updateAllSessions is a function passed as a prop
-    // updateAllSessions(formData);
     setFormData({
       date: "",
       exercise: "",
@@ -38,6 +38,9 @@ const AddSessionForm = ({ updateAllSessions }) => {
       sets: "",
       weight: "",
     });
+
+    // Use navigate to go to the ViewSessions route with form data as state
+    navigate("/ViewSessions", { state: { formData } });
   };
 
   return (
@@ -120,7 +123,7 @@ export default function AddSession() {
         <div className="row d-flex justify-content-center">
           <div className="col-md-8 text-center">
             <div className="blurb py-4">
-              <h1 className="mb-4">Add Session</h1>
+              <h1 className="mb-4">About Us</h1>
               <p>
                 Some text goes here
                 hfdklshfjkldshkjgbdjkabgjhdebljgbadljgbjkdasbgjkl
@@ -138,9 +141,7 @@ export default function AddSession() {
           </div>
         </div>
       </div>
-      <div className="text-center">
-        <NavigationButtons />
-      </div>
+      <div className="text-center"></div>
       <Outlet />
     </div>
   );

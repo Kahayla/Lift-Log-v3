@@ -116,7 +116,7 @@ const EditSession = () => {
                   Save
                 </button>
                 <Link
-                  to="/view-sessions"
+                  to="/ViewSessions"
                   className="btn btn-secondary btn-sm mt-2 ms-2"
                 >
                   Cancel

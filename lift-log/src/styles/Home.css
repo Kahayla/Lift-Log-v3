@@ -3,3 +3,15 @@
   font-family: Arial Black, Helvetica, sans-serif;
   font-weight: 900;
 }
+
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 8rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .title {
+    font-size: 12rem;
+  }
+}

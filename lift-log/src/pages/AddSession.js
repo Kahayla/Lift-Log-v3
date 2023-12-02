@@ -23,9 +23,25 @@ const AddSessionForm = () => {
     weight: "",
   });
 
+  const [isCustomExercise, setIsCustomExercise] = useState(false);
+  const [customExercise, setCustomExercise] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === "exercise" && value === "other") {
+      setIsCustomExercise(true);
+    } else {
+      setIsCustomExercise(false);
+      setCustomExercise(""); // Clear custom exercise input when switching to a predefined exercise
+    }
+
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleCustomExerciseChange = (e) => {
+    setCustomExercise(e.target.value);
+    setFormData((prevData) => ({ ...prevData, exercise: e.target.value }));
   };
 
   const handleSubmit = (e) => {
@@ -33,13 +49,21 @@ const AddSessionForm = () => {
 
     if (
       !formData.date ||
-      !formData.exercise ||
+      (!formData.exercise && !isCustomExercise) ||
       !formData.reps ||
       !formData.sets ||
       !formData.weight
     ) {
       alert("Please fill in all fields.");
       return;
+    }
+
+    // If it's a custom exercise, add it to the options
+    if (isCustomExercise) {
+      const newExercise = customExercise.trim();
+      if (newExercise && !exerciseOptions.includes(newExercise)) {
+        exerciseOptions.push(newExercise);
+      }
     }
 
     const newSession = { ...formData, id: uuidv4() };
@@ -53,6 +77,8 @@ const AddSessionForm = () => {
       sets: "",
       weight: "",
     });
+    setCustomExercise("");
+    setIsCustomExercise(false);
     navigate("/ViewSessions");
   };
 
@@ -95,7 +121,19 @@ const AddSessionForm = () => {
                 {exercise}
               </option>
             ))}
+            <option value="other">Other</option>
           </Form.Control>
+          {isCustomExercise && (
+            <Form.Control
+              type="text"
+              placeholder="Enter custom exercise"
+              name="customExercise"
+              value={customExercise}
+              onChange={handleCustomExerciseChange}
+              className="mt-2"
+              required
+            />
+          )}
         </div>
       </Form.Group>
 

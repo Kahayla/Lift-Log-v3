@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
+// Validation schema
 const validationSchema = Yup.object().shape({
   exercise: Yup.string().required("Exercise is required"),
   reps: Yup.number()
@@ -24,8 +25,6 @@ const validationSchema = Yup.object().shape({
 
 const ViewSessions = () => {
   const { state, dispatch } = useSession();
-  console.log("Location State in ViewSessions:", useLocation().state);
-  console.log("Sessions Data in ViewSessions:", state.sessions);
 
   const formik = useFormik({
     initialValues: {
@@ -36,7 +35,6 @@ const ViewSessions = () => {
       weight: "",
       date: "",
     },
-
     validationSchema: validationSchema,
     onSubmit: (values) => {
       if (values.id) {
@@ -53,7 +51,6 @@ const ViewSessions = () => {
       formik.resetForm();
     },
   });
-  console.log("Location State:", useLocation().state);
 
   return (
     <div className="App">
@@ -68,61 +65,63 @@ const ViewSessions = () => {
       </h1>
       <div className="container">
         {state.sessions.length > 0 ? (
-          state.sessions.map((session) => (
-            <div key={session.id} className="row mb-3 justify-content-center">
-              <div
-                className="card col-12 col-md-6 p-0"
-                style={{ maxWidth: "18rem", marginTop: "3rem" }}
-              >
-                <div className="card-header position-relative">
-                  {formik.values.id === session.id ? (
-                    <>
-                      <span>Edit Session</span>
-                      <button
-                        className="btn btn-success btn-sm position-absolute top-0 end-0 mt-2 me-2"
-                        onClick={formik.handleSubmit}
-                      >
-                        Save
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      {`Session Date: ${session.date}`}
-
-                      {session && (
-                        <Link
-                          to={{
-                            pathname: `/EditSession/${session.id}`,
-                            state: { session },
-                          }}
-                          className="btn btn-primary btn-sm position-absolute top-0 end-0 mt-2 me-2"
+          state.sessions
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .map((session) => (
+              <div key={session.id} className="row mb-3 justify-content-center">
+                <div
+                  className="card col-12 col-md-6 p-0"
+                  style={{ maxWidth: "18rem", marginTop: "3rem" }}
+                >
+                  <div className="card-header position-relative">
+                    {formik.values.id === session.id ? (
+                      <>
+                        <span>Edit Session</span>
+                        <button
+                          className="btn btn-success btn-sm position-absolute top-0 end-0 mt-2 me-2"
+                          onClick={formik.handleSubmit}
                         >
-                          Edit
-                        </Link>
-                      )}
-                    </>
-                  )}
+                          Save
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        {`Session Date: ${new Date(
+                          session.date
+                        ).toLocaleDateString("en-GB")}`}
+                        {session && (
+                          <Link
+                            to={{
+                              pathname: `/EditSession/${session.id}`,
+                              state: { session },
+                            }}
+                            className="btn btn-primary btn-sm position-absolute top-0 end-0 mt-2 me-2"
+                          >
+                            Edit
+                          </Link>
+                        )}
+                      </>
+                    )}
+                  </div>
+                  <form onSubmit={formik.handleSubmit}>
+                    <ul className="list-group list-group-flush">
+                      <li className={`list-group-item p-2`}>{`Exercise: ${
+                        session.exercise || ""
+                      }`}</li>
+                      <li className={`list-group-item p-2`}>{`Reps: ${
+                        session.reps || ""
+                      }`}</li>
+                      <li className={`list-group-item p-2`}>{`Sets: ${
+                        session.sets || ""
+                      }`}</li>
+                      <li className={`list-group-item p-2`}>{`Weight (kg): ${
+                        session.weight || ""
+                      }`}</li>
+                    </ul>
+                  </form>
                 </div>
-                <form onSubmit={formik.handleSubmit}>
-                  <ul className="list-group list-group-flush">
-                    {/* Use session data directly */}
-                    <li className={`list-group-item p-2`}>{`Exercise: ${
-                      session.exercise || ""
-                    }`}</li>
-                    <li className={`list-group-item p-2`}>{`Reps: ${
-                      session.reps || ""
-                    }`}</li>
-                    <li className={`list-group-item p-2`}>{`Sets: ${
-                      session.sets || ""
-                    }`}</li>
-                    <li className={`list-group-item p-2`}>{`Weight (kg): ${
-                      session.weight || ""
-                    }`}</li>
-                  </ul>
-                </form>
               </div>
-            </div>
-          ))
+            ))
         ) : (
           <div className="row d-flex justify-content-center">
             <div className="col-md-8 text-center">

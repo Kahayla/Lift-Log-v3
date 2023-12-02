@@ -33,37 +33,26 @@ const AddSessionForm = () => {
       setIsCustomExercise(true);
     } else {
       setIsCustomExercise(false);
-      setCustomExercise(""); // Clear custom exercise input when switching to a predefined exercise
     }
 
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleCustomExerciseChange = (e) => {
-    setCustomExercise(e.target.value);
-    setFormData((prevData) => ({ ...prevData, exercise: e.target.value }));
+    const value = e.target.value;
+    setCustomExercise(value);
+    setFormData((prevData) => ({ ...prevData, exercise: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (
-      !formData.date ||
-      (!formData.exercise && !isCustomExercise) ||
-      !formData.reps ||
-      !formData.sets ||
-      !formData.weight
+      isCustomExercise &&
+      customExercise.trim() &&
+      !exerciseOptions.includes(customExercise.trim())
     ) {
-      alert("Please fill in all fields.");
-      return;
-    }
-
-    // If it's a custom exercise, add it to the options
-    if (isCustomExercise) {
-      const newExercise = customExercise.trim();
-      if (newExercise && !exerciseOptions.includes(newExercise)) {
-        exerciseOptions.push(newExercise);
-      }
+      exerciseOptions.push(customExercise.trim());
     }
 
     const newSession = { ...formData, id: uuidv4() };
@@ -100,7 +89,6 @@ const AddSessionForm = () => {
           />
         </div>
       </Form.Group>
-
       <Form.Group className="mb-3 row" controlId="formBasicExercise">
         <Form.Label className="col-sm-2 col-form-label col-md-3">
           Exercise:
@@ -109,9 +97,9 @@ const AddSessionForm = () => {
           <Form.Control
             as="select"
             name="exercise"
-            value={formData.exercise}
+            value={isCustomExercise ? "other" : formData.exercise}
             onChange={handleChange}
-            required
+            required={!isCustomExercise}
           >
             <option value="" disabled>
               Select an exercise:
@@ -131,12 +119,10 @@ const AddSessionForm = () => {
               value={customExercise}
               onChange={handleCustomExerciseChange}
               className="mt-2"
-              required
             />
           )}
         </div>
       </Form.Group>
-
       <Form.Group className="mb-3 row" controlId="formBasicReps">
         <Form.Label className="col-sm-2 col-form-label col-md-3">
           Reps:

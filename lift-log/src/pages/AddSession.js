@@ -70,6 +70,7 @@ const AddSessionForm = () => {
             value={formData.date}
             onChange={handleChange}
             required
+            max={new Date().toISOString().split("T")[0]}
           />
         </div>
       </Form.Group>

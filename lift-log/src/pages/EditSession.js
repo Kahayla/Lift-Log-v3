@@ -75,6 +75,7 @@ const EditSession = () => {
                     value={formikValues.date}
                     onChange={handleInputChange}
                     required
+                    max={new Date().toISOString().split("T")[0]}
                   />
                 </Form.Group>
 

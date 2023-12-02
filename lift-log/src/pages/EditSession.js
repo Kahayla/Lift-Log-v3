@@ -152,9 +152,7 @@ const EditSession = () => {
           </div>
         </div>
       </div>
-      <div className="text-center">
-        <NavigationButtons />
-      </div>
+      <div className="text-center"></div>
     </div>
   );
 };
